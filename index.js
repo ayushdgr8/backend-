@@ -1,3 +1,4 @@
+require("dotenv").config();
 const bodyParser = require('body-parser');
 
 const express = require('express');
@@ -6,13 +7,13 @@ const cors = require('cors');
 
 
 const app = express();
-const   URL="mongodb+srv://ayushagrawal1024:DFqORt8Neu7jkZoT@litost.p48ke.mongodb.net/?retryWrites=true&w=majority&appName=Litost";
+const   URL=process.env.URLL
 app.use(bodyParser.urlencoded({extended : true}));
 app.use(express.json());
 app.use(cors());
 
 
-mongoose.connect(URL, { useNewUrlParser: true });
+mongoose.connect(process.env.URLL, { useNewUrlParser: true });
 
 const HeroSchema = new mongoose.Schema({
     title: String,
@@ -52,6 +53,7 @@ app.post('/api/hero-section', async (req, res) => {
         res.status(500).json({ error: "Internal Server Error" });
     }
 });
+
 
 app.get("/api/products", (req, res) => {
     const products = [
